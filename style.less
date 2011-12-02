@@ -70,23 +70,17 @@ body {
 		}
 		#one, #three {
 			z-index: 1;
-			.transition-duration(3s, ease-in-out);
+			.transition(left, 3s, ease-in-out);
 		}
 		ul {
 			padding: 10px 0 10px 30px;
 				li {
 					position: relative;
-						span {
-							position: relative;
-							z-index: 1;
-							text-shadow: white 0 0 3px;
-							cursor: default;
-						}
-						&.checked:before {
+						&:before {
 							content: '';
 							width: 10px;
 							height: 10px;
-							background: rgba(255, 0, 0, .5);
+							border: 1px solid rgba(0, 0, 0, 0.5);
 							position: absolute;
 							left: -15px;
 							top: 2px;
@@ -94,6 +88,18 @@ body {
 							border-radius: 50%;
 							opacity: 1;
 							z-index: 2;
+							.transition(border, 1s, ease-in-out);
+						}
+						&.checked:before {
+							border-color: transparent;
+							background: rgba(255, 0, 0, .5);
+						}
+						span {
+							position: relative;
+							z-index: 1;
+							text-shadow: white 0 0 3px;
+							cursor: default;
+							.transition(opacity, 3s, linear);
 						}
 				}
 		}
@@ -112,11 +118,13 @@ body {
 			top: -5px;
 			.rounded(10px);
 				&:hover {
+					li:before {
+						border: 1px solid transparent;
+					}
 					#one, #three {
 						left: 200px;
 							span {
 								opacity: 0;
-								.transition(1s, ease-in-out);
 							}
 					}
 				}
